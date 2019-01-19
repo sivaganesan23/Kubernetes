@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: studentapp 
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

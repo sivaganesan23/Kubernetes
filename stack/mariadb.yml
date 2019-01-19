@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mariadb 
+  labels:
+    app: studentapp
+    component: DB
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentapp
+      component: DB
+  template:
+    metadata:
+      labels:
+        app: studentapp
+        component: DB
+    spec:
+      containers:
+      - name: mariadb 
+        image: mariadb 
+        ports:
+        - containerPort: 3306
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root
+...
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-svc
+  labels:
+    app: studentapp
+    component: DB
+spec:
+  selector:
+    app: studentapp
+    component: DB
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+...

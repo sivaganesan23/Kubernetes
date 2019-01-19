@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet 
+metadata:
+  name: demo-ds 
+  labels:
+    app: studentapp
+spec:
+  selector:
+    matchLabels:
+      app: studentapp
+  template:
+    metadata:
+      labels:
+        app: studentapp
+    spec:
+      containers:
+      - name: webservice
+        image: raghudevops33/kube-demo
+        ports:
+        - containerPort: 80
+

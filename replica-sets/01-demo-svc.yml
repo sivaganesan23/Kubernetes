@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-svc
+spec:
+  selector:
+    app: studentapp 
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
