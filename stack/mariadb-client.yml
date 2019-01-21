@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maria-client
+spec:
+  containers:
+    - name: centos
+      image: centos
+      command: ["sleep" , "9000"]

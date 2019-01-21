@@ -1,6 +1,6 @@
 ---
-apiVersion: apps/v1
-kind: ReplicaSet
+apiVersion: apps/v1 
+kind: ReplicaSet 
 metadata:
   name: mariadb 
   labels:
@@ -20,18 +20,27 @@ spec:
     spec:
       containers:
       - name: mariadb 
-        image: mariadb 
+        image: raghudevops33/stack-mariadb 
         ports:
         - containerPort: 3306
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: root
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: mariadb-data
+      nodeSelector:
+        DATABASE: "YES"
+      volumes:
+      - name: mariadb-data
+        persistentVolumeClaim:
+          claimName: mariadb-data
 ...
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: demo-svc
+  name: mariadb-svc
   labels:
     app: studentapp
     component: DB
