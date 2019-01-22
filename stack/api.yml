@@ -22,7 +22,8 @@ spec:
       - name: api 
         image: raghudevops33/stack-api 
         ports:
-        - containerPort: 8080
+        - containerPort: 8090
+        imagePullPolicy: Always
         env:
           - name: RDS_ENDPOINT
             value: mariadb-svc
@@ -46,14 +47,13 @@ metadata:
   name: api-svc
   labels:
     app: studentapp
-    component: APP
+    component: API
 spec:
-  type: LoadBalancer
   selector:
     app: studentapp
-    component: APP
+    component: API
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 8090
+    targetPort: 8090
 ...
