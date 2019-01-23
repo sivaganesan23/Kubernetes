@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-load
+spec:
+  template:
+    spec:
+      containers:
+      - name: dbload
+        image: raghudevops33/stack-dbload
+        env:
+          - name: DBHOST
+            value: mariadb-svc
+          - name: DBNAME
+            value: root
+          - name: DBPASS
+            value: root
+      restartPolicy: Never

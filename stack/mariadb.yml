@@ -29,8 +29,8 @@ spec:
         volumeMounts:
           - mountPath: /var/lib/mysql
             name: mariadb-data
-      nodeSelector:
-        DATABASE: "YES"
+#      nodeSelector:
+#        DATABASE: "YES"
       volumes:
       - name: mariadb-data
         persistentVolumeClaim:

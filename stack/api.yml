@@ -37,8 +37,8 @@ spec:
               secretKeyRef:
                 name: studentapp-mariadb-secret
                 key: password         
-      nodeSelector:
-        APPLICATION: "YES"
+#      nodeSelector:
+#        APPLICATION: "YES"
 ...
 ---
 kind: Service

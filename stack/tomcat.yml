@@ -24,8 +24,8 @@ spec:
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
-      nodeSelector:
-        APPLICATION: "YES"
+#      nodeSelector:
+#        APPLICATION: "YES"
 ...
 ---
 kind: Service
