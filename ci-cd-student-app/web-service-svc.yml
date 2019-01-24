@@ -1,0 +1,18 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-public-svc
+  labels:
+    app: studentapp
+    component: WEB
+spec:
+  type: LoadBalancer
+  selector:
+    app: studentapp
+    component: WEB
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+...

@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: tomcat 
+  labels:
+    app: studentapp
+    component: TOMCAT
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentapp
+      component: TOMCAT 
+  template:
+    metadata:
+      labels:
+        app: studentapp
+        component: TOMCAT
+    spec:
+      containers:
+      - name: api 
+        image: raghudevops33/stack-tomcat 
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+#      nodeSelector:
+#        APPLICATION: "YES"
+...
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomcat-svc
+  labels:
+    app: studentapp
+    component: TOMCAT
+spec:
+  selector:
+    app: studentapp
+    component: TOMCAT
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+...

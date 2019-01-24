@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: web-service 
+  labels:
+    app: studentapp
+    component: WEB
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentapp
+      component: WEB 
+  template:
+    metadata:
+      labels:
+        app: studentapp
+        component: WEB
+    spec:
+      containers:
+      - name: api 
+        image: raghudevops33/stack-web
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+#      nodeSelector:
+#        APPLICATION: "YES"
+...
+

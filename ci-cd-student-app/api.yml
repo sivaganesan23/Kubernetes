@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: api 
+  labels:
+    app: studentapp
+    component: API
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentapp
+      component: API 
+  template:
+    metadata:
+      labels:
+        app: studentapp
+        component: API
+    spec:
+      containers:
+      - name: api 
+        image: raghudevops33/stack-api:IMAGE_VERSION 
+        ports:
+        - containerPort: 8090
+        imagePullPolicy: Always
+        env:
+          - name: RDS_ENDPOINT
+            value: mariadb-svc
+          - name: RDS_USER
+            valueFrom:
+              secretKeyRef:
+                name: studentapp-mariadb-secret
+                key: username
+          - name: RDS_PASS
+            valueFrom:
+              secretKeyRef:
+                name: studentapp-mariadb-secret
+                key: password         
+#      nodeSelector:
+#        APPLICATION: "YES"
+...
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-svc
+  labels:
+    app: studentapp
+    component: API
+spec:
+  selector:
+    app: studentapp
+    component: API
+  ports:
+  - protocol: TCP
+    port: 8090
+    targetPort: 8090
+...
